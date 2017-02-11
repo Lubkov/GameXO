@@ -1,6 +1,7 @@
 package ua.lubkov.game.xo.model;
 
 import org.junit.Test;
+import ua.lubkov.game.xo.model.exceptions.AlreadyOccupiedException;
 import ua.lubkov.game.xo.model.exceptions.InvalidPointException;
 
 import static org.junit.Assert.*;
@@ -63,5 +64,14 @@ public class FieldTest {
         final Point inputPoint = new Point(0, field.getSize());
 
         field.getFigure(inputPoint);
+    }
+
+    @Test(expected = AlreadyOccupiedException.class)
+    public void getFigureWhenAlreadyOccupied() throws Exception {
+        final Field field = new Field();
+        final Point inputPoint = new Point(1, 1);
+
+        field.setFigure(inputPoint, Figure.X);
+        field.setFigure(inputPoint, Figure.O);
     }
 }
