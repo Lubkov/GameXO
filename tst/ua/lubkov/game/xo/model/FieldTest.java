@@ -65,13 +65,4 @@ public class FieldTest {
 
         field.getFigure(inputPoint);
     }
-
-    @Test(expected = AlreadyOccupiedException.class)
-    public void getFigureWhenAlreadyOccupied() throws Exception {
-        final Field field = new Field();
-        final Point inputPoint = new Point(1, 1);
-
-        field.setFigure(inputPoint, Figure.X);
-        field.setFigure(inputPoint, Figure.O);
-    }
 }
