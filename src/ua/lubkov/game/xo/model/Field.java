@@ -2,8 +2,6 @@ package ua.lubkov.game.xo.model;
 
 import ua.lubkov.game.xo.model.exceptions.InvalidPointException;
 
-import java.util.*;
-
 public class Field {
 
     private final int fieldSize;
