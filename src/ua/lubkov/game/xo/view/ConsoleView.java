@@ -20,7 +20,7 @@ public class ConsoleView {
     public void show(final Game game) {
         Field field = game.getField();
 
-        System.out.format("Крестики-нолики: \"%s\"\n\n", game.getName());
+        showGameName(game);
         System.out.println("     x1  x2  x3");
 
         for (int y = 0; y < field.getSize(); y++) {
@@ -34,7 +34,7 @@ public class ConsoleView {
         final Figure winner = winnerController.getWinner(field);
 
         if (winner != null) {
-            System.out.format("Победитель %s!!!\n", winner);
+            System.out.format("Победитель %s, %s!!!\n", game.getPlayer(winner).getName(), winner);
             return false;
         }
 
@@ -45,7 +45,7 @@ public class ConsoleView {
             return false;
         }
 
-        System.out.printf("Ходит %s:\n", currentFigure);
+        System.out.printf("Ходит %s, %s:\n", game.getPlayer(currentFigure).getName(), currentFigure);
         Point point = askPoint();
         try {
             moveController.applyFigure(field, point, currentFigure);
@@ -53,6 +53,17 @@ public class ConsoleView {
             System.out.println("Введены неверные координаты");
         }
         return true;
+    }
+
+    public String askPlayerName(final int playerNumber) {
+        System.out.format("Введите имя игрока #%s: ", playerNumber);
+        final Scanner in = new Scanner(System.in);
+        try {
+            return in.nextLine();
+        } catch (final InputMismatchException e) {
+            System.out.println("Неверный ввод");
+            return askPlayerName(playerNumber);
+        }
     }
 
     private Point askPoint() {
@@ -68,6 +79,10 @@ public class ConsoleView {
             System.out.println("Неверный ввод");
             return askCoordinate(coordinateName);
         }
+    }
+
+    private void showGameName(final Game game) {
+        System.out.format("Крестики-нолики: \"%s\"\n\n", game.getName());
     }
 
     private void printLine(Field field, int y) {
