@@ -1,21 +1,26 @@
 package ua.lubkov.game.xo.model;
 
-
-import ua.lubkov.game.xo.model.exceptions.AlreadyOccupiedException;
 import ua.lubkov.game.xo.model.exceptions.InvalidPointException;
+
+import java.util.*;
 
 public class Field {
 
-    private static final int FIELD_SIZE = 3;
+    private final int fieldSize;
 
     private static final int MIN_COORDINATE = 0;
 
-    private static final int MAX_COORDINATE = FIELD_SIZE;
+    private final Figure[][] field;
 
-    private final Figure[][] field = new Figure[FIELD_SIZE][FIELD_SIZE];
+    public Field(final int fieldSize) {
+
+        this.fieldSize = fieldSize;
+        field = new Figure[fieldSize][fieldSize];
+    }
 
     public int getSize() {
-        return FIELD_SIZE;
+
+        return fieldSize;
     }
 
     public Figure getFigure(final Point point) throws InvalidPointException {
@@ -34,12 +39,13 @@ public class Field {
         field[point.getX()][point.getY()] = figure;
     }
 
-
     private boolean checkPoint(final Point point) {
-        return checkCoordinate(point.getX()) && checkCoordinate(point.getY());
+
+        return checkCoordinate(point.getX(), fieldSize) && checkCoordinate(point.getY(), fieldSize);
     }
 
-    private boolean checkCoordinate(final int coordinate) {
-        return (coordinate >= MIN_COORDINATE) && (coordinate < MAX_COORDINATE);
+    private boolean checkCoordinate(final int coordinate, final int maxCoordinate) {
+
+        return (coordinate >= MIN_COORDINATE) && (coordinate < maxCoordinate);
     }
 }
