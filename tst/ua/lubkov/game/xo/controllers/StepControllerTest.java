@@ -32,6 +32,15 @@ public class StepControllerTest {
     }
 
     @Test
+    public void nextStepPatTest() throws Exception {
+
+        final Field field = new FieldBilder().getFieldNextStepPat();
+        final StepController stepController = new StepController();
+
+        assertNull(stepController.nextStep(field));
+    }
+
+    @Test
     public void countFigureInTheRow() throws Exception {
 
         final int row = 0;
@@ -42,5 +51,4 @@ public class StepControllerTest {
 
         assertEquals(expectedValue, actualValue);
     }
-
 }
