@@ -7,10 +7,12 @@ public class Player {
     private final Figure figure;
 
     public String getName() {
+
         return name;
     }
 
     public Figure getFigure() {
+
         return figure;
     }
 
