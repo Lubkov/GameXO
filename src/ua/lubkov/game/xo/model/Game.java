@@ -17,6 +17,7 @@ public class Game {
     }
 
     public Player[] getPlayers() {
+
         return players;
     }
 
@@ -25,6 +26,18 @@ public class Game {
     }
 
     public String getName() {
+
         return name;
+    }
+
+    public Player getPlayer(Figure figure) {
+
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].getFigure().equals(figure)) {
+                return players[i];
+            }
+        }
+
+        return null;
     }
 }
