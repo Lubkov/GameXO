@@ -26,7 +26,7 @@ public class WinnerController {
                  return field.getFigure(new Point(0, 0));
              }
              //diagonal
-             if (checkwinner(field, new Point(field.getSize() - 1, 0), -11, 1)) {
+             if (checkwinner(field, new Point(field.getSize() - 1, 0), -1, 1)) {
                  return field.getFigure(new Point(field.getSize() - 1, 0));
              }
 
@@ -37,7 +37,7 @@ public class WinnerController {
          return null;
      }
 
-    boolean checkwinner(final Field field,
+    private boolean checkwinner(final Field field,
                         final Point point,
                         final int x1,
                         final int y1) throws InvalidPointException {
@@ -45,14 +45,14 @@ public class WinnerController {
          int x = point.getX();
          int y = point.getY();
 
-         while ((x < field.getSize() - 1) && (y < field.getSize() - 1)){
+         do {
              x+= x1;
              y+= y1;
 
              if (field.getFigure(point) != field.getFigure(new Point(x, y))) {
                  return false;
              }
-         }
+         } while ((x + x1 < field.getSize()) && (y + y1 < field.getSize()));
 
         return true;
     }
