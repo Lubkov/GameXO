@@ -51,6 +51,20 @@ public class FieldBilder {
                     {Figure.O, Figure.X, Figure.O}
             };
 
+    private static final Figure[][] FIELD_NEXT_STEP_X =
+            {
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null}
+            };
+
+    private static final Figure[][] FIELD_NEXT_STEP_O =
+            {
+                    {null, null, Figure.O},
+                    {null, Figure.X, null},
+                    {Figure.X, null, null}
+            };
+
     private Field createField(Figure[][] data) throws InvalidPointException {
         Field field = new Field(FIELD_SIZE);
 
@@ -87,7 +101,17 @@ public class FieldBilder {
         return createField(FIELD_NO_WIN);
     }
 
-    public Field getFieldPat() throws InvalidPointException {
+    public Field getFieldNextStepX() throws InvalidPointException {
+
+        return createField(FIELD_NEXT_STEP_X);
+    }
+
+    public Field getFieldNextStepO() throws InvalidPointException {
+
+        return createField(FIELD_NEXT_STEP_O);
+    }
+
+    public Field getFieldNextStepPat() throws InvalidPointException {
 
         return createField(FIELD_PAT);
     }
